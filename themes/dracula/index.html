@@ -15,12 +15,11 @@
 
   <div id="background">
     <div id="bg-cover"></div>
-    <img src="./assets/dracula.png" alt="">
   </div>
 
-  <div id="cover" class="hide">
+  <button id="cover" class="hide">
     <div id="message"></div>
-  </div>
+  </button>
 
   <div id="screen">
 
@@ -102,6 +101,21 @@
 
     </div>
 
+    <div id="system-bar">
+      <div id="layouts-list">
+        <button id="layouts-button" class="">
+          LATAM
+        </button>
+        <ul id="layouts-dropdown" class="dropdown hide">
+          <li><button>Latam</button></li>
+          <li><button>English</button></li>
+        </ul>
+      </div>
+
+      <div id="brightness-label"></div>
+      <div id="battery-label"></div>
+    </div>
+
     <button id="panel-button" class="button">
       <span class="mdi mdi-menu mdi-24px"></span>
     </button>
@@ -133,7 +147,10 @@
   <script src="js/sidebar.js"></script>
   <script src="js/backgrounds.js"></script>
   <script src="js/time-date.js"></script>
+  <script src="js/layouts.js"></script>
   <script src="js/power.js"></script>
+  <script src="js/battery.js"></script>
+  <script src="js/brightness.js"></script>
   <script src="js/index.js"></script>
 </body>
 </html>
