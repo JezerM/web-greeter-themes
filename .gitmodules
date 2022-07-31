@@ -1,0 +1,3 @@
+[submodule "ts-types"]
+	path = ts-types
+	url = https://github.com/JezerM/nody-greeter-types.git
