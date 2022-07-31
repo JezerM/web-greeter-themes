@@ -27,6 +27,7 @@ jobs:
       name: Build themes
       run: |
         ./build.sh
+        rm -f themes/**/.gitignore
         tree themes/
     -
       name: Publish
