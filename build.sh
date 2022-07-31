@@ -14,3 +14,5 @@ done
 
 tsc --build themes/gruvbox
 tsc --build themes/dracula
+
+rsync -r . build/

@@ -22,18 +22,17 @@ jobs:
       name: Setup node
       run: |
         sudo apt update
-        sudo apt install node-typescript
+        sudo apt install node-typescript rsync
     -
       name: Build themes
       run: |
         ./build.sh
-        rm -f themes/**/.gitignore
         tree themes/
     -
       name: Publish
       uses: JamesIves/github-pages-deploy-action@v4.3.0
       with:
         branch: gh-pages
-        folder: .
+        folder: build
         clean: false
         force: true
