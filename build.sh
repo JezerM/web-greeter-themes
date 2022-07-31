@@ -11,3 +11,6 @@ replace() {
 for item in $files; do
   replace $item
 done
+
+tsc --build themes/gruvbox
+tsc --build themes/dracula
