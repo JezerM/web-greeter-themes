@@ -49,7 +49,7 @@
 
 @media screen and (min-width: 3000px) and (min-height: 1200px) {
   #screen {
-    zoom: 2.0;
+    zoom: 2;
   }
 }
 
@@ -72,7 +72,7 @@ html > * {
 
 body {
   display: flex;
-  min-height:  100vh;
+  min-height: 100vh;
   margin: 0;
   transition: var(--animation-duration);
 }
@@ -100,6 +100,7 @@ body {
 .info:hover {
   background: #3c3836aa;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 button {
@@ -107,15 +108,6 @@ button {
   border: 0;
   font-size: inherit;
   font-family: inherit;
-}
-
-#background {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-
-  background-color: var(--bg);
-  background-image: url("../assets/bubbles.svg")
 }
 
 #cover {
@@ -132,6 +124,7 @@ button {
 
   background-color: #282828aa;
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 #cover > #message {
@@ -158,17 +151,21 @@ button {
   border-bottom: 8px solid;
   max-height: 90vh;
   box-sizing: border-box;
-  height: 22em;
-  transition: var(--animation-duration);
+  height: 24em;
+  transition: filter var(--animation-duration);
 }
 
-#login-form:focus-within, #login-form:hover {
-  filter: drop-shadow(2px 6px 10px rgba(0,0,0,0.8));
+#login-form:focus-within,
+#login-form:hover {
+  filter: drop-shadow(2px 6px 10px rgba(0, 0, 0, 0.8));
 }
 
 #login-form-box {
   position: relative;
   height: -webkit-fill-available;
+  height: 100%;
+  box-sizing: border-box;
+
   display: flex;
   padding: 1.5em 3em;
   align-items: center;
@@ -189,9 +186,31 @@ input {
   font-family: inherit;
   font-size: inherit;
 }
-input:focus, input:focus-visible {
+input:focus,
+input:focus-visible {
   border: 0;
   outline: auto var(--fg);
+}
+#input {
+  position: relative;
+}
+#input #pass-eye {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 2.5em;
+  background-color: var(--bg1);
+}
+#input #pass-eye:hover,
+#input #pass-eye:focus {
+  background-color: var(--bg2);
+}
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
 }
 
 :focus {
@@ -243,7 +262,7 @@ input:focus, input:focus-visible {
 
 #user-label {
   margin: 0.5em;
-  font-size: calc(1em + 4px);
+  font-size: 1.4em;
 }
 
 #pass-form > form {
@@ -254,31 +273,20 @@ input:focus, input:focus-visible {
 #submit-button {
   background: var(--aqua);
 }
-#submit-button:hover, #submit-button:focus {
+#submit-button:hover,
+#submit-button:focus {
   background: var(--light_aqua);
 }
 
 #session-label {
-  bottom: 0;
-  left: 0;
+  margin: 0;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
 }
 #lock-label {
   top: 0;
   left: 0;
   font-weight: bold;
-}
-
-#time-date {
-  top: 0;
-  font-weight: bold;
-  font-size: calc(1em + 2px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-#time-date span {
-  display: block;
 }
 
 .label-bar {
@@ -302,15 +310,17 @@ input:focus, input:focus-visible {
   display: none;
 }
 
-.label-bar > *:hover, .label-bar > *:focus-within {
+.label-bar > *:hover,
+.label-bar > *:focus-within {
   background: #3c3836aa;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-#layouts-list {
+#layout-list {
   padding: 0;
 }
-#layouts-button {
+#layout-list-button {
   all: unset;
   cursor: pointer;
   padding: 8px;
@@ -318,8 +328,8 @@ input:focus, input:focus-visible {
 #layouts-dropdown {
   position: absolute;
   margin: 2px;
+  right: 0;
 }
-
 
 #system-status {
   top: 0;
@@ -335,13 +345,14 @@ input:focus, input:focus-visible {
   font-size: 2em;
   cursor: pointer;
 }
-#system-power > *:hover, #system-power > *:focus {
+#system-power > *:hover,
+#system-power > *:focus {
   background: #3c3836aa;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-
-#sessions-list {
+#session-list {
   position: absolute;
   left: 0;
   top: 0;
@@ -349,7 +360,7 @@ input:focus, input:focus-visible {
   align-items: flex-start;
   flex-direction: column;
 }
-#users-list {
+#user-list {
   position: absolute;
   right: 0;
   top: 0;
@@ -358,12 +369,12 @@ input:focus, input:focus-visible {
   flex-direction: column;
 }
 
-#sessions-button {
+#session-list-button {
   background: var(--blue);
   margin: 10px;
 }
 
-#users-button {
+#user-list-button {
   background: var(--purple);
   margin: 10px;
   float: right;
@@ -388,8 +399,10 @@ input:focus, input:focus-visible {
   color: var(--fg);
   padding: 0.8em;
   width: -webkit-fill-available;
+  width: -moz-available;
 }
-.dropdown button:hover, .dropdown button:focus {
+.dropdown button:hover,
+.dropdown button:focus {
   background: var(--bg4);
 }
 .dropdown.hide {
@@ -406,13 +419,16 @@ li {
   display: block;
 }
 
-#users-button:hover, #users-button:focus {
+#users-button:hover,
+#users-button:focus {
   background: var(--light_purple);
 }
-#sessions-button:hover, #sessions-button:focus {
+#sessions-button:hover,
+#sessions-button:focus {
   background: var(--light_blue);
 }
-.button:hover span::before, .button:focus span::before {
+.button:hover span::before,
+.button:focus span::before {
   transform: rotate(180deg);
 }
 .button span::before {
@@ -431,5 +447,5 @@ li {
   background: var(--blue);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--light_blue)
+  background: var(--light_blue);
 }
