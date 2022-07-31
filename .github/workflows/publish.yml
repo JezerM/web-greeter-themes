@@ -1,0 +1,32 @@
+name: Publish page
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    name: Build page
+    runs-on: ubuntu-latest
+
+    steps:
+
+    -
+      name: Checkout
+      uses: actions/checkout@v2
+    -
+      name: Setup node
+      run: |
+        sudo apt update
+        sudo apt install node-typescript
+    -
+      name: Build themes
+      run: ./build.sh
+    -
+      name: Publish
+      uses: JamesIves/github-pages-deploy-action@v4.3.0
+      with:
+        branch: gh-pages
+        folder: .
