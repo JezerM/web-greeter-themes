@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-files=$(find themes/ -name index.html)
+mv themes/_vendor themes/vendor
+
+files=$(find themes/ -name "*.html")
 
 replace() {
   sed -i "s/_vendor/vendor/g" $1
