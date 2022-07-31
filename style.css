@@ -1,0 +1,169 @@
+html {
+  color: #ebdbb2;
+  background-color: #282828;
+  font-family: system-ui;
+
+  min-height:100%;
+  position:relative;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+}
+
+#background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  background-color: var(--bg);
+  background-image: url("./themes/gruvbox/assets/death star.svg")
+}
+
+#screen {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+#wrapper {
+  width: 45em;
+  max-width: 60vw;
+  min-height: 18em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #32302f;
+  margin: 15px;
+  border-radius: 5px;
+
+  filter: drop-shadow(2px 6px 10px rgba(0,0,0,0.8));
+}
+#wrapper > h2 {
+  font-weight: bold;
+  font-size: 1.8em;
+  text-align: center;
+}
+
+#wrapper-themes {
+  width: -webkit-fill-available;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1em 0em 2em 0em;
+}
+
+a {
+  color: #ebdbb2;
+  text-decoration: none;
+}
+
+.theme-div {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin: 5px;
+
+  border-radius: 5px;
+  background-color: #665c54;
+
+  transition: 300ms;
+}
+.theme-div img{
+  width: 16em;
+  max-width: 30vw;
+  height: fit-content;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.theme-div:hover, .theme-div:focus {
+  background-color: #83a598;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+span {
+  color: #ebdbb2;
+  font-weight: bold;
+}
+
+.floating {
+  position: fixed;
+}
+.floating.right {
+  right: 0;
+}
+.floating.bottom {
+  bottom: 0;
+}
+.floating.left {
+  left: 0;
+}
+.floating.top {
+  top: 0;
+}
+
+#floating-buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 1.2em;
+}
+.social {
+  display: inline-block;
+  border-radius: 100%;
+  backdrop-filter: blur(5px);
+  background-color: #50494500;
+  transition: 300ms;
+  padding: 5px;
+  margin: 5px;
+}
+.social:hover, .social:focus {
+  background-color: #504945;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 90px;
+  background-color: #504945;
+  color: #ebdbb2;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+
+  opacity: 0;
+  transition: opacity 300ms;
+}
+.tooltiptext {
+  font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext, .tooltip:focus .tooltiptext, .tooltip:focus-within .tooltiptext {
+  opacity: 1;
+  visibility: visible;
+}
