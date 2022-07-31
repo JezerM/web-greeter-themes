@@ -15,4 +15,4 @@ done
 tsc --build themes/gruvbox
 tsc --build themes/dracula
 
-rsync -r . build/
+rsync -r . build/ --exclude .gitignore --exclude .gitmodules --exclude .git --exclude .github
