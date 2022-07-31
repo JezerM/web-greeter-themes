@@ -25,10 +25,13 @@ jobs:
         sudo apt install node-typescript
     -
       name: Build themes
-      run: ./build.sh
+      run: |
+        ./build.sh
+        tree themes/
     -
       name: Publish
       uses: JamesIves/github-pages-deploy-action@v4.3.0
       with:
         branch: gh-pages
         folder: .
+        clean: false
