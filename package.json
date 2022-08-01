@@ -1,0 +1,38 @@
+{
+  "name": "web-greeter-themes",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "lint:theme:gruvbox": "eslint \"themes/gruvbox/ts/**\"",
+    "lint:theme:gruvbox:fix": "eslint \"themes/gruvbox/ts/**\" --fix",
+    "lint:theme:dracula": "eslint \"themes/dracula/ts/**\"",
+    "lint:theme:dracula:fix": "eslint \"themes/dracula/ts/**\" --fix",
+    "lint:themes": "npm run lint:theme:gruvbox && npm run lint:theme:dracula",
+    "lint:themes:fix": "npm run lint:theme:gruvbox:fix && npm run lint:theme:dracula:fix",
+    "prettier:theme:gruvbox": "prettier --check themes/gruvbox/ts/ ",
+    "prettier:theme:gruvbox:fix": "prettier --write themes/gruvbox/ts/",
+    "prettier:theme:dracula": "prettier --check themes/dracula/ts/ ",
+    "prettier:theme:dracula:fix": "prettier --write themes/dracula/ts/",
+    "prettier:themes": "npm run prettier:theme:gruvbox && npm run prettier:theme:dracula",
+    "prettier:themes:fix": "npm run prettier:theme:gruvbox:fix && npm run prettier:theme:dracula:fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JezerM/web-greeter-themes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JezerM/web-greeter-themes/issues"
+  },
+  "homepage": "https://github.com/JezerM/web-greeter-themes#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
+  }
+}
