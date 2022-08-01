@@ -19,12 +19,12 @@ export class Authenticate {
       this.doRespond();
     });
   }
-  public setAuthentication_done(): void {
+  public setAuthenticationDone(): void {
     window.lightdm?.authentication_complete.connect(() => {
       if (window.lightdm?.is_authenticated) {
-        this._authentication_done();
+        this._authenticationDone();
       } else {
-        this._authentication_failed();
+        this._authenticationFailed();
       }
     });
   }
@@ -64,7 +64,7 @@ export class Authenticate {
     window.lightdm?.authenticate(user?.username ?? null);
   }
 
-  public async _authentication_done(): Promise<void> {
+  public async _authenticationDone(): Promise<void> {
     const form = document.querySelector("#login-form");
     form?.classList.add("success");
 
@@ -78,7 +78,7 @@ export class Authenticate {
     window.lightdm?.start_session(defSession?.key ?? null);
   }
 
-  public async _authentication_failed(): Promise<void> {
+  public async _authenticationFailed(): Promise<void> {
     this.startAuthentication();
     document.querySelector("#login-form")?.classList.add("failed");
     if (this._inputPassword) {
@@ -93,7 +93,7 @@ export class Authenticate {
 
   public init(): void {
     this.setForm();
-    this.setAuthentication_done();
+    this.setAuthenticationDone();
     this.setPasswordEye();
     console.log("Start authentication");
     this.startAuthentication();

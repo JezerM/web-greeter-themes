@@ -1,3 +1,6 @@
+// TODO: Remove this eslint-disable comment
+/* eslint-disable @typescript-eslint/naming-convention */
+
 import {
   Signal as SignalClass,
   Greeter as GreeterClass,
@@ -346,23 +349,23 @@ class GreeterConfig implements GreeterConfigClass {
   };
 }
 
-let time_language = "";
+let timeLanguage = "";
 class ThemeUtils implements ThemeUtilsClass {
   // eslint-disable-next-line
   public bind_this(context: Record<string, any>): Record<string, any> {
-    const excluded_methods = ["constructor"];
+    const excludedMethods = ["constructor"];
 
-    function not_excluded(
+    function notExcluded(
       _method: string,
       _context: Record<string, unknown>
     ): boolean {
-      const is_excluded =
-          excluded_methods.findIndex(
-            (excluded_method) => _method === excluded_method
+      const isExcluded =
+          excludedMethods.findIndex(
+            (excludedMethod) => _method === excludedMethod
           ) > -1,
-        is_method = "function" === typeof _context[_method];
+        isMethod = "function" === typeof _context[_method];
 
-      return is_method && !is_excluded;
+      return isMethod && !isExcluded;
     }
 
     for (let obj = context; obj; obj = Object.getPrototypeOf(obj)) {
@@ -372,7 +375,7 @@ class ThemeUtils implements ThemeUtilsClass {
       }
 
       for (const method of Object.getOwnPropertyNames(obj)) {
-        if (not_excluded(method, context)) {
+        if (notExcluded(method, context)) {
           context[method] = context[method].bind(context);
         }
       }
@@ -411,11 +414,11 @@ class ThemeUtils implements ThemeUtilsClass {
     const config = window.greeter_config?.greeter;
     const locale = [];
 
-    if (time_language === null) {
-      time_language = config?.time_language || "";
+    if (timeLanguage === null) {
+      timeLanguage = config?.time_language || "";
     }
-    if (time_language != "") {
-      locale.push(time_language);
+    if (timeLanguage != "") {
+      locale.push(timeLanguage);
     }
 
     const optionsDate: Intl.DateTimeFormatOptions = {
@@ -430,11 +433,11 @@ class ThemeUtils implements ThemeUtilsClass {
     const config = window.greeter_config?.greeter;
     const locale = [];
 
-    if (time_language === null) {
-      time_language = config?.time_language || "";
+    if (timeLanguage === null) {
+      timeLanguage = config?.time_language || "";
     }
-    if (time_language != "") {
-      locale.push(time_language);
+    if (timeLanguage != "") {
+      locale.push(timeLanguage);
     }
 
     const optionsTime: Intl.DateTimeFormatOptions = {
