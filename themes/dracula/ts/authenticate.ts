@@ -63,7 +63,7 @@ export class Authenticate {
     message?.classList.add("hide");
   }
 
-  public async _authentication_done(): Promise<void> {
+  public async _authenticationDone(): Promise<void> {
     const body = document.querySelector("body");
     if (body) body.classList.add("success");
 
@@ -89,7 +89,7 @@ export class Authenticate {
     );
   }
 
-  public async _authentication_failed(): Promise<void> {
+  public async _authenticationFailed(): Promise<void> {
     window.lightdm?.cancel_authentication();
     const body = document.querySelector("body");
     if (body) body.classList.add("failed");
@@ -127,9 +127,9 @@ export class Authenticate {
   public setAuthenticationDone(): void {
     window.lightdm?.authentication_complete.connect(() => {
       if (window.lightdm?.is_authenticated) {
-        this._authentication_done();
+        this._authenticationDone();
       } else {
-        this._authentication_failed();
+        this._authenticationFailed();
       }
     });
   }

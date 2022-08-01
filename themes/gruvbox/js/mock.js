@@ -1,3 +1,5 @@
+// TODO: Remove this eslint-disable comment
+/* eslint-disable @typescript-eslint/naming-convention */
 class LightDMLanguage {
     constructor(code, name, territory) {
         this.code = code;
@@ -269,14 +271,14 @@ class GreeterConfig {
         };
     }
 }
-let time_language = "";
+let timeLanguage = "";
 class ThemeUtils {
     // eslint-disable-next-line
     bind_this(context) {
-        const excluded_methods = ["constructor"];
-        function not_excluded(_method, _context) {
-            const is_excluded = excluded_methods.findIndex((excluded_method) => _method === excluded_method) > -1, is_method = "function" === typeof _context[_method];
-            return is_method && !is_excluded;
+        const excludedMethods = ["constructor"];
+        function notExcluded(_method, _context) {
+            const isExcluded = excludedMethods.findIndex((excludedMethod) => _method === excludedMethod) > -1, isMethod = "function" === typeof _context[_method];
+            return isMethod && !isExcluded;
         }
         for (let obj = context; obj; obj = Object.getPrototypeOf(obj)) {
             // Stop once we have traveled all the way up the inheritance chain
@@ -284,7 +286,7 @@ class ThemeUtils {
                 break;
             }
             for (const method of Object.getOwnPropertyNames(obj)) {
-                if (not_excluded(method, context)) {
+                if (notExcluded(method, context)) {
                     context[method] = context[method].bind(context);
                 }
             }
@@ -317,11 +319,11 @@ class ThemeUtils {
     get_current_localized_date() {
         const config = window.greeter_config?.greeter;
         const locale = [];
-        if (time_language === null) {
-            time_language = config?.time_language || "";
+        if (timeLanguage === null) {
+            timeLanguage = config?.time_language || "";
         }
-        if (time_language != "") {
-            locale.push(time_language);
+        if (timeLanguage != "") {
+            locale.push(timeLanguage);
         }
         const optionsDate = {
             day: "2-digit",
@@ -334,11 +336,11 @@ class ThemeUtils {
     get_current_localized_time() {
         const config = window.greeter_config?.greeter;
         const locale = [];
-        if (time_language === null) {
-            time_language = config?.time_language || "";
+        if (timeLanguage === null) {
+            timeLanguage = config?.time_language || "";
         }
-        if (time_language != "") {
-            locale.push(time_language);
+        if (timeLanguage != "") {
+            locale.push(timeLanguage);
         }
         const optionsTime = {
             hour: "2-digit",

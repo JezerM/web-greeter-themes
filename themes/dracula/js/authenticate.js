@@ -53,7 +53,7 @@ export class Authenticate {
         const message = document.querySelector("#auth-message");
         message?.classList.add("hide");
     }
-    async _authentication_done() {
+    async _authenticationDone() {
         const body = document.querySelector("body");
         if (body)
             body.classList.add("success");
@@ -75,7 +75,7 @@ export class Authenticate {
         console.log("Session started with", defSession);
         window.lightdm?.start_session(defSession?.key ?? window.lightdm.default_session);
     }
-    async _authentication_failed() {
+    async _authenticationFailed() {
         window.lightdm?.cancel_authentication();
         const body = document.querySelector("body");
         if (body)
@@ -109,10 +109,10 @@ export class Authenticate {
     setAuthenticationDone() {
         window.lightdm?.authentication_complete.connect(() => {
             if (window.lightdm?.is_authenticated) {
-                this._authentication_done();
+                this._authenticationDone();
             }
             else {
-                this._authentication_failed();
+                this._authenticationFailed();
             }
         });
     }

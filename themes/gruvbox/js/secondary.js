@@ -6,18 +6,18 @@ async function wait(ms) {
         }, ms);
     });
 }
-async function _authentication_done() {
+async function _authenticationDone() {
     await wait(500);
     const body = document.querySelector("body");
     if (body)
         body.style.opacity = "0";
 }
-function authentication_done() {
+function authenticationDone() {
     if (window.lightdm?.is_authenticated)
-        _authentication_done();
+        _authenticationDone();
 }
 function initGreeter() {
-    window.lightdm?.authentication_complete?.connect(() => authentication_done());
+    window.lightdm?.authentication_complete?.connect(() => authenticationDone());
     window.backgrounds = new Backgrounds();
     window.backgrounds.init();
 }

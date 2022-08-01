@@ -7,18 +7,18 @@ export class Battery {
     updateData() {
         if (!window.lightdm || !this._batteryLabel)
             return;
-        this._batteryInfo = window.lightdm.batteryData;
+        this._batteryInfo = window.lightdm.battery_data;
         const level = this._batteryInfo.level;
         //const state = this._info.state;
-        const ac_status = this._batteryInfo.ac_status;
+        const acStatus = this._batteryInfo.ac_status;
         let icon = "0";
         let charging = "";
         const blevel = Math.floor(level / 10) * 10;
         icon = `-${blevel}`;
-        charging = ac_status ? "-charging" : "";
+        charging = acStatus ? "-charging" : "";
         if (blevel < 10)
             icon = "-outline";
-        if (level == 100 && !ac_status) {
+        if (level == 100 && !acStatus) {
             icon = "";
         }
         if (level >= 0) {

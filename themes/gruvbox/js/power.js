@@ -8,7 +8,7 @@ export class Power {
         this._coverMsg = document.querySelector("#cover > #message");
         this.init();
     }
-    show_message(text) {
+    showMessage(text) {
         if (!this._coverMsg || !this._cover)
             return;
         this._coverMsg.innerHTML = text;
@@ -17,23 +17,23 @@ export class Power {
             this._cover?.focus();
         });
     }
-    async do_shutdown() {
-        this.show_message("Shutting down");
+    async doShutdown() {
+        this.showMessage("Shutting down");
         await window.wait(1000);
         window.lightdm?.shutdown();
     }
-    async do_restart() {
-        this.show_message("Restarting");
+    async doRestart() {
+        this.showMessage("Restarting");
         await window.wait(1000);
         window.lightdm?.restart();
     }
-    async do_hibernate() {
-        this.show_message("Hibernating");
+    async doHibernate() {
+        this.showMessage("Hibernating");
         await window.wait(1000);
         window.lightdm?.hibernate();
     }
-    async do_suspend() {
-        this.show_message("Suspending");
+    async doSuspend() {
+        this.showMessage("Suspending");
         await window.wait(1000);
         window.lightdm?.suspend();
     }
@@ -41,7 +41,7 @@ export class Power {
         if (!window.lightdm?.can_shutdown || !this._shutdownButton)
             return;
         this._shutdownButton.addEventListener("click", () => {
-            this.do_shutdown();
+            this.doShutdown();
         });
         this._shutdownButton.classList.remove("hide");
     }
@@ -49,7 +49,7 @@ export class Power {
         if (!window.lightdm?.can_restart || !this._restartButton)
             return;
         this._restartButton.addEventListener("click", () => {
-            this.do_restart();
+            this.doRestart();
         });
         this._restartButton.classList.remove("hide");
     }
@@ -57,7 +57,7 @@ export class Power {
         if (!window.lightdm?.can_hibernate || !this._hibernateButton)
             return;
         this._hibernateButton.addEventListener("click", () => {
-            this.do_hibernate();
+            this.doHibernate();
         });
         this._hibernateButton.classList.remove("hide");
     }
@@ -65,7 +65,7 @@ export class Power {
         if (!window.lightdm?.can_suspend || !this._suspendButton)
             return;
         this._suspendButton.addEventListener("click", () => {
-            this.do_suspend();
+            this.doSuspend();
         });
         this._suspendButton.classList.remove("hide");
     }
