@@ -35,6 +35,8 @@ export class Accounts {
                 "No user";
             this._userLabel.innerHTML = `<b>${name}</b>`;
         }
+        if (window.sessions)
+            window.sessions.updateOnStartup();
     }
     updateOnStartup() {
         if (!this._usersObject)

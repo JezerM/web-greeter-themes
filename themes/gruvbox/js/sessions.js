@@ -3,25 +3,27 @@ export class Sessions {
         this._sessionLabel = document.querySelector("#session-label");
         this._sessionListButton = document.querySelector("#session-list-button");
         this._sessionsDropdown = document.querySelector("#sessions-dropdown");
-        this._defaultSession = null;
+        this._selectedSession = null;
         this._sessionsObject = null;
         this.init();
     }
     getDefaultSession() {
-        return this._defaultSession;
+        return this._selectedSession;
     }
     updateSessionLabel() {
         if (!this._sessionLabel)
             return;
-        this._sessionLabel.innerText = this._defaultSession?.name ?? "";
+        this._sessionLabel.innerText = this._selectedSession?.name ?? "";
     }
     updateOnStartup() {
         if (!this._sessionsObject)
             return;
-        const sessionKey = window.localStorage.getItem("defaultSession") ||
-            this._sessionsObject[0].key ||
-            window.lightdm?.default_session;
-        this._defaultSession =
+        let sessionKey = window.accounts.getDefaultAccount()?.session;
+        if (!sessionKey && this._sessionsObject.length > 0)
+            sessionKey = this._sessionsObject[0].key;
+        if (!sessionKey)
+            sessionKey = window.lightdm?.default_session;
+        this._selectedSession =
             this._sessionsObject.find((el) => el.key == sessionKey) ?? null;
         this.updateSessionLabel();
     }
@@ -35,18 +37,12 @@ export class Sessions {
             const button = document.createElement("button");
             button.innerText = name;
             button.addEventListener("click", () => {
-                this.updateStorage(v);
+                this._selectedSession = v;
                 this.updateSessionLabel();
             });
             li.appendChild(button);
             this._sessionsDropdown.appendChild(li);
         }
-    }
-    updateStorage(session) {
-        if (!session)
-            return;
-        this._defaultSession = session;
-        window.localStorage.setItem("defaultSession", this._defaultSession.key);
     }
     setKeydown() {
         this._sessionsDropdown?.addEventListener("keydown", (ev) => {
