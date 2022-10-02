@@ -69,7 +69,7 @@ export class Authenticate {
     form?.classList.add("success");
 
     await window.wait(500);
-    const defSession = window.sessions.getDefaultSession();
+    const defSession = window.sessions.getSelectedSession();
     const body = document.querySelector("body");
     if (body) body.style.opacity = "0";
 
