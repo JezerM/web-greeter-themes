@@ -1,7 +1,9 @@
+import { Data } from "./data.js";
 import { Backgrounds } from "./background.js";
 
 declare global {
   interface Window {
+    themeData: Data;
     backgrounds: Backgrounds;
   }
 }
@@ -27,6 +29,7 @@ function authenticationDone(): void {
 function initGreeter(): void {
   window.lightdm?.authentication_complete?.connect(() => authenticationDone());
 
+  window.themeData = new Data();
   window.backgrounds = new Backgrounds();
   window.backgrounds.init();
 }

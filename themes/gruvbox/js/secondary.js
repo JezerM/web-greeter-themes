@@ -1,3 +1,4 @@
+import { Data } from "./data.js";
 import { Backgrounds } from "./background.js";
 async function wait(ms) {
     return new Promise((resolve) => {
@@ -18,6 +19,7 @@ function authenticationDone() {
 }
 function initGreeter() {
     window.lightdm?.authentication_complete?.connect(() => authenticationDone());
+    window.themeData = new Data();
     window.backgrounds = new Backgrounds();
     window.backgrounds.init();
 }
