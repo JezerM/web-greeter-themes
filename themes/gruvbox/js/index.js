@@ -1,3 +1,4 @@
+import { Data } from "./data.js";
 import { Accounts } from "./accounts.js";
 import { Authenticate } from "./authenticate.js";
 import { Sessions } from "./sessions.js";
@@ -20,6 +21,7 @@ async function initGreeter() {
     if (window.greeter_config?.greeter.debug_mode) {
         // Run debug
     }
+    window.themeData = new Data();
     window.accounts = new Accounts();
     window.sessions = new Sessions();
     window.authenticate = new Authenticate();

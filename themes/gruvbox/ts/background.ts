@@ -92,13 +92,10 @@ export class Backgrounds {
   }
 
   public updateOnStartup(): void {
-    this._backgroundPath =
-      window.localStorage.getItem("defaultBackgroundImage") ||
-      defaultBackgrounds[0];
+    this._backgroundPath = window.themeData.background ?? defaultBackgrounds[0];
     this.updateBackground(this._backgroundPath);
 
-    this._backgroundBlur =
-      Number(window.localStorage.getItem("backgroundBlur")) || 0;
+    this._backgroundBlur = window.themeData.backgroundBlur;
     this.setBackgroundBlur();
   }
 
@@ -136,7 +133,8 @@ export class Backgrounds {
     } else {
       this._backgroundElement.style.backgroundSize = "cover";
     }
-    window.localStorage.setItem("defaultBackgroundImage", this._backgroundPath);
+    window.themeData.background = this._backgroundPath;
+    window.themeData.save();
   }
 
   public updateBackground(path: string): void {
@@ -263,10 +261,8 @@ export class Backgrounds {
 
     this._backgroundBlurInput.addEventListener("input", () => {
       this._backgroundBlur = this._backgroundBlurInput?.valueAsNumber ?? 0;
-      window.localStorage.setItem(
-        "backgroundBlur",
-        this._backgroundBlur.toString()
-      );
+      window.themeData.backgroundBlur = this._backgroundBlur;
+      window.themeData.save();
       this.setBackgroundBlur();
     });
   }

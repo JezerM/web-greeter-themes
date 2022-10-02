@@ -1,3 +1,4 @@
+import { Data } from "./data.js";
 import { Accounts } from "./accounts.js";
 import { Authenticate } from "./authenticate.js";
 import { Sessions } from "./sessions.js";
@@ -11,6 +12,7 @@ import "./mock.js";
 
 declare global {
   interface Window {
+    themeData: Data;
     accounts: Accounts;
     sessions: Sessions;
     authenticate: Authenticate;
@@ -39,6 +41,8 @@ async function initGreeter(): Promise<void> {
   if (window.greeter_config?.greeter.debug_mode) {
     // Run debug
   }
+
+  window.themeData = new Data();
 
   window.accounts = new Accounts();
 
