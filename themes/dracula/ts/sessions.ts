@@ -4,43 +4,38 @@ export class Sessions {
   private _sessionsButton: HTMLButtonElement | null;
   private _sessionsDropdown: HTMLUListElement | null;
   private _sessionLabel: HTMLSpanElement | null;
-  private _defaultSession: LightDMSession | null;
+  private _selectedSession: LightDMSession | null;
   private _sessionsObject: LightDMSession[];
 
   public constructor() {
     this._sessionsButton = document.querySelector("#sessions-button");
     this._sessionsDropdown = document.querySelector("#sessions-dropdown");
     this._sessionLabel = document.querySelector("#sessions-button > .text");
-    this._defaultSession = null;
+    this._selectedSession = null;
     this._sessionsObject = [];
     this.init();
   }
 
-  public getDefaultSession(): LightDMSession | null {
-    return this._defaultSession;
+  public getSelectedSession(): LightDMSession | null {
+    return this._selectedSession;
   }
 
   public updateSessionLabel(): void {
     if (!this._sessionLabel) return;
-    this._sessionLabel.innerText = this._defaultSession?.name ?? "";
+    this._sessionLabel.innerText = this._selectedSession?.name ?? "";
   }
 
   public updateOnStartup(): void {
     if (!this._sessionsObject) return;
-    const sessionKey =
-      window.localStorage.getItem("defaultSession") ||
-      this._sessionsObject[0].key ||
-      window.lightdm?.default_session;
+    let sessionKey = window.accounts.getDefaultAccount()?.session;
 
-    this._defaultSession =
+    if (!sessionKey && this._sessionsObject.length > 0)
+      sessionKey = this._sessionsObject[0].key;
+    if (!sessionKey) sessionKey = window.lightdm?.default_session;
+
+    this._selectedSession =
       this._sessionsObject.find((el) => el.key == sessionKey) ?? null;
     this.updateSessionLabel();
-  }
-
-  public updateStorage(session: LightDMSession): void {
-    if (!session) return;
-    this._defaultSession = session;
-    window.localStorage.setItem("defaultSession", this._defaultSession.key);
   }
 
   public setSessionList(): void {
@@ -52,7 +47,7 @@ export class Sessions {
       const button = document.createElement("button");
       button.innerText = name;
       button.addEventListener("click", () => {
-        this.updateStorage(v);
+        this._selectedSession = v;
         this.updateSessionLabel();
       });
 

@@ -27,6 +27,8 @@ export class Accounts {
         if (this._usersObject && this._usersObject.length > 0) {
             this._userListButton?.classList.remove("hide");
         }
+        if (window.sessions)
+            window.sessions.updateOnStartup();
     }
     updateOnStartup() {
         if (!this._usersObject)

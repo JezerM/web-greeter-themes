@@ -68,7 +68,7 @@ export class Authenticate {
         topbar.classList.add("hide");
         bottombar.classList.add("hide");
         await window.wait(1000);
-        const defSession = window.sessions.getDefaultSession();
+        const defSession = window.sessions.getSelectedSession();
         if (body)
             body.style.opacity = "0";
         await window.wait(1000);

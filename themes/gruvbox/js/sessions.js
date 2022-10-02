@@ -7,7 +7,7 @@ export class Sessions {
         this._sessionsObject = null;
         this.init();
     }
-    getDefaultSession() {
+    getSelectedSession() {
         return this._selectedSession;
     }
     updateSessionLabel() {

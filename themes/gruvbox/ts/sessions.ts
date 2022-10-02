@@ -16,7 +16,7 @@ export class Sessions {
     this.init();
   }
 
-  public getDefaultSession(): LightDMSession | null {
+  public getSelectedSession(): LightDMSession | null {
     return this._selectedSession;
   }
 
