@@ -52,7 +52,7 @@ export class Accounts {
 
   public updateOnStartup(): void {
     if (!this._usersObject) return;
-    const dfUserName = window.localStorage.getItem("defaultUserName");
+    const dfUserName = window.themeData.userName;
 
     let user = window.lightdm?.users.find(
       (value) => value.username == dfUserName
@@ -109,7 +109,8 @@ export class Accounts {
 
     this._defaultUser = user;
 
-    window.localStorage.setItem("defaultUserName", user.username);
+    window.themeData.userName = user.username;
+    window.themeData.save();
   }
 
   public setKeydown(): void {
