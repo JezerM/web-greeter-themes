@@ -131,7 +131,7 @@
 
 		// clear entry
 		entry.value = "";
-		entry.type = type;
+		entry.type = type == 0 ? "text" : "password";
 	};
 
 	/**
@@ -154,11 +154,11 @@
 	 * authentication_complete callback.
 	 */
 	window.authentication_complete = function() {
-		if (lightdm.is_authenticated) {
+		if (window.lightdm.is_authenticated) {
 			// Start default session
 			// let body = document.getElementById('body');
-			let session = lightdm.default_session
-			document.documentElement.addEventListener('transitionend', () => {lightdm.start_session(session)});
+			let session = window.lightdm.default_session
+			document.documentElement.addEventListener('transitionend', () => {window.lightdm.start_session(session)});
 			document.documentElement.className = 'session_starting';
 		} else {
 			show_message("Authentication Failed", "error");
@@ -192,7 +192,7 @@
 	window.start_authentication = function() {
 		clear_messages();
 		// start without providing "user" to make the greeter prompt for "user"
-		lightdm.authenticate("");
+		window.lightdm.authenticate(null);
 	};
 
 	/**
@@ -200,14 +200,14 @@
 	 */
 	window.handle_input = function() {
 		let entry = document.getElementById("entry");
-		lightdm.respond(entry.value);
+		window.lightdm.respond(entry.value);
 	};
 
 	window.addEventListener("GreeterReady", () => {
-		lightdm.show_message.connect(show_message)
-		lightdm.show_prompt.connect(show_prompt)
-		lightdm.authentication_complete.connect(authentication_complete)
-		lightdm.autologin_timer_expired.connect(autologin_timer_expired)
+		window.lightdm.show_message.connect(show_message)
+		window.lightdm.show_prompt.connect(show_prompt)
+		window.lightdm.authentication_complete.connect(authentication_complete)
+		window.lightdm.autologin_timer_expired.connect(autologin_timer_expired)
 
 		start_authentication()
 	});
