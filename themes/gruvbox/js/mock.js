@@ -36,6 +36,9 @@ class LightDMSession {
         this.type = type ?? "X";
     }
 }
+function signalToSignal(signal) {
+    return signal;
+}
 class Signal {
     constructor(name) {
         this._callbacks = [];
@@ -72,17 +75,20 @@ const battery = {
     capacity: 100,
     watt: 0,
 };
+function mock(instance) {
+    return instance;
+}
 class Greeter {
     constructor() {
         this.mock_password = "pes";
-        this.authentication_complete = new Signal("authentication_complete");
-        this.autologin_timer_expired = new Signal("autologin_timer_expired");
-        this.idle = new Signal("idle");
-        this.reset = new Signal("reset");
-        this.show_message = new Signal("show_message");
-        this.show_prompt = new Signal("show_prompt");
-        this.brightness_update = new Signal("show_message");
-        this.battery_update = new Signal("battery_update");
+        this.authentication_complete = mock(new Signal("authentication_complete"));
+        this.autologin_timer_expired = mock(new Signal("autologin_timer_expired"));
+        this.idle = mock(new Signal("idle"));
+        this.reset = mock(new Signal("reset"));
+        this.show_message = mock(new Signal("show_message"));
+        this.show_prompt = mock(new Signal("show_prompt"));
+        this.brightness_update = mock(new Signal("show_message"));
+        this.battery_update = mock(new Signal("battery_update"));
         this.authentication_user = null;
         this.autologin_guest = false;
         this.autologin_timeout = 0;
@@ -146,13 +152,13 @@ class Greeter {
         else if (quantity > 100)
             quantity = 100;
         this._brightness = quantity;
-        this.brightness_update._emit();
+        signalToSignal(this.brightness_update)._emit();
     }
     authenticate(username) {
         this.authentication_user = username;
         this.in_authentication = true;
         if (username == null) {
-            this.show_prompt._emit("login:", 0);
+            signalToSignal(this.show_prompt)._emit("login:", 0);
         }
         return true;
     }
@@ -206,19 +212,19 @@ class Greeter {
             return false;
         if (this.authentication_user == null) {
             this.authentication_user = response;
-            this.show_prompt._emit("Password: ", 1);
+            signalToSignal(this.show_prompt)._emit("Password: ", 1);
         }
         else {
             if (response === this.mock_password) {
                 this.is_authenticated = true;
                 this.in_authentication = false;
-                this.authentication_complete._emit();
+                signalToSignal(this.authentication_complete)._emit();
             }
             else {
                 setTimeout(() => {
                     this.is_authenticated = false;
-                    this.authentication_complete._emit();
-                    this.show_prompt._emit("Password: ", 1);
+                    signalToSignal(this.authentication_complete)._emit();
+                    signalToSignal(this.show_prompt)._emit("Password: ", 1);
                 }, 3000);
             }
         }
@@ -293,7 +299,7 @@ class ThemeUtils {
         }
         return context;
     }
-    dirlist(path, only_images = true, // eslint-disable-line
+    dirlist(path, _only_images = true, // eslint-disable-line
     callback) {
         if ("" === path || "string" !== typeof path) {
             console.error(`theme_utils.dirlist(): path must be a non-empty string!`);
@@ -313,7 +319,7 @@ class ThemeUtils {
         }
     }
     // eslint-disable-next-line
-    dirlist_sync(path, images_only = true) {
+    dirlist_sync(_path, _images_only = true) {
         return [];
     }
     get_current_localized_date() {

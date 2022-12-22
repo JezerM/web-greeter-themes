@@ -76,7 +76,13 @@ class LightDMSession {
   }
 }
 
-class Signal implements SignalClass {
+type PublicPart<T> = Pick<T, keyof T>;
+
+function signalToSignal(signal: SignalClass): Signal {
+  return signal as unknown as Signal;
+}
+
+class Signal implements PublicPart<SignalClass> {
   public _name: string;
   public _callbacks: ((...args: unknown[]) => void)[] = [];
 
@@ -116,17 +122,21 @@ const battery = {
   watt: 0,
 };
 
+function mock(instance: Signal): SignalClass {
+  return instance as unknown as SignalClass;
+}
+
 class Greeter implements GreeterClass {
   public mock_password = "pes";
 
-  public authentication_complete = new Signal("authentication_complete");
-  public autologin_timer_expired = new Signal("autologin_timer_expired");
-  public idle = new Signal("idle");
-  public reset = new Signal("reset");
-  public show_message = new Signal("show_message");
-  public show_prompt = new Signal("show_prompt");
-  public brightness_update = new Signal("show_message");
-  public battery_update = new Signal("battery_update");
+  public authentication_complete = mock(new Signal("authentication_complete"));
+  public autologin_timer_expired = mock(new Signal("autologin_timer_expired"));
+  public idle = mock(new Signal("idle"));
+  public reset = mock(new Signal("reset"));
+  public show_message = mock(new Signal("show_message"));
+  public show_prompt = mock(new Signal("show_prompt"));
+  public brightness_update = mock(new Signal("show_message"));
+  public battery_update = mock(new Signal("battery_update"));
 
   public authentication_user: string | null = null;
   public autologin_guest = false;
@@ -142,7 +152,7 @@ class Greeter implements GreeterClass {
     if (quantity < 0) quantity = 0;
     else if (quantity > 100) quantity = 100;
     this._brightness = quantity;
-    this.brightness_update._emit();
+    signalToSignal(this.brightness_update)._emit();
   }
 
   public can_access_battery = true;
@@ -225,7 +235,7 @@ class Greeter implements GreeterClass {
     this.authentication_user = username;
     this.in_authentication = true;
     if (username == null) {
-      this.show_prompt._emit("login:", 0);
+      signalToSignal(this.show_prompt)._emit("login:", 0);
     }
     return true;
   }
@@ -282,17 +292,17 @@ class Greeter implements GreeterClass {
     if (!this.in_authentication) return false;
     if (this.authentication_user == null) {
       this.authentication_user = response;
-      this.show_prompt._emit("Password: ", 1);
+      signalToSignal(this.show_prompt)._emit("Password: ", 1);
     } else {
       if (response === this.mock_password) {
         this.is_authenticated = true;
         this.in_authentication = false;
-        this.authentication_complete._emit();
+        signalToSignal(this.authentication_complete)._emit();
       } else {
         setTimeout(() => {
           this.is_authenticated = false;
-          this.authentication_complete._emit();
-          this.show_prompt._emit("Password: ", 1);
+          signalToSignal(this.authentication_complete)._emit();
+          signalToSignal(this.show_prompt)._emit("Password: ", 1);
         }, 3000);
       }
     }
@@ -385,7 +395,7 @@ class ThemeUtils implements ThemeUtilsClass {
   }
   public dirlist(
     path: string,
-    only_images = true, // eslint-disable-line
+    _only_images = true, // eslint-disable-line
     callback: (files: string[]) => void
   ): void {
     if ("" === path || "string" !== typeof path) {
@@ -406,7 +416,7 @@ class ThemeUtils implements ThemeUtilsClass {
     }
   }
   // eslint-disable-next-line
-  public dirlist_sync(path: string, images_only = true): string[] {
+  public dirlist_sync(_path: string, _images_only = true): string[] {
     return [];
   }
 
