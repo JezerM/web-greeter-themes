@@ -1,0 +1,1 @@
+{"root":["../../ts-types/index.d.ts","../../ts-types/ldm_interfaces.d.ts","./ts/accounts.ts","./ts/authenticate.ts","./ts/background.ts","./ts/battery.ts","./ts/brightness.ts","./ts/data.ts","./ts/index.ts","./ts/layouts.ts","./ts/mock.ts","./ts/power.ts","./ts/secondary.ts","./ts/sessions.ts","./ts/timeDate.ts"],"version":"6.0.2"}
